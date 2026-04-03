@@ -493,7 +493,13 @@
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- VERSION STAMP -->
+  <div id="version-stamp" style="background: rgba(201,149,106,0.15); border-bottom: 1px solid rgba(201,149,106,0.3); text-align:center; padding: 0.4rem; font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.15em; color:var(--rose-gold);">
+    Version: <span id="vstamp"></span>
+  </div>
+  <script>
+    document.getElementById('vstamp').textContent = 'April 3, 2026 – 11:58 PM ET';
+  </script>
   <nav id="main-nav">
     <a href="#hero" class="nav-logo">Happy Skin Spa</a>
     <ul class="nav-links">

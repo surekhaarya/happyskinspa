@@ -483,51 +483,20 @@
       .btn-primary, .btn-secondary { width: 100%; text-align: center; max-width: 280px; }
     }
   
-    /* ── MOBILE MENU ENHANCEMENT ── */
-    .hamburger {
-      position: relative;
-      z-index: 10001;
-      padding: 10px;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-    }
+.nav-mobile-open .nav-links {
+  display: flex !important;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+  background: rgba(14,0,16,0.96);
+  backdrop-filter: blur(12px);
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  z-index: 9999;
+}
+</style>
 
-    .nav-mobile-open {
-      background: rgba(14,0,16,0.98);
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-mobile-open .nav-links {
-      display: flex !important;
-      flex-direction: column;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(14,0,16,0.96);
-      backdrop-filter: blur(14px);
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      z-index: 9999;
-      animation: menuFadeIn 0.28s ease;
-    }
-
-    .nav-mobile-open .nav-links a {
-      font-size: 1.05rem;
-      letter-spacing: 0.22em;
-    }
-
-    .nav-mobile-open .nav-book {
-      display: inline-block;
-      margin-top: 1rem;
-      z-index: 10000;
-    }
-
-    @keyframes menuFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-  </style>
 </head>
 <body>
 
@@ -783,55 +752,66 @@
   <!-- CONTACT -->
   
   
+
 <section id="contact">
-    <div class="section-inner">
-      <div class="contact-grid">
-        <div class="reveal visible">
-          <p class="section-label">Get in Touch</p>
-          <h2 class="section-title">Find <em>Us</em></h2>
-          <div class="divider"></div>
+  <div class="section-inner">
+    <div class="contact-grid">
 
-          <div class="contact-info-item">
-            <div class="label">Location</div>
-            <div class="value">Your City, State &nbsp;·&nbsp; Private Home Studio</div>
-          </div>
+      <div>
+        <p class="section-label">Visit Us</p>
+        <h2 class="section-title">Find <em>Us</em></h2>
+        <div class="divider"></div>
 
-          <div class="contact-info-item">
-            <div class="label">Phone / Text</div>
-            <div class="value"><a href="tel:+10000000000">(000) 000-0000</a></div>
-          </div>
+        <div class="contact-info-item">
+          <div class="label">Location</div>
+          <div class="value">Herndon, VA</div>
+        </div>
 
-          <div class="contact-info-item">
-            <div class="label">Email</div>
-            <div class="value"><a href="/cdn-cgi/l/email-protection#ec8489808083ac848d9c9c959f8785829f9c8dc28f8381"><span class="__cf_email__" data-cfemail="abc3cec7c7c4ebc3cadbdbd2d8c0c2c5d8dbca85c8c4c6">[email&#160;protected]</span></a></div>
-          </div>
-
-          <div class="contact-info-item">
-            <div class="label">Instagram</div>
-            <div class="value"><a href="https://instagram.com/happyskinspa" target="_blank">@happyskinspa</a></div>
+        <div class="contact-info-item">
+          <div class="label">Phone / Text</div>
+          <div class="value">
+            <a href="tel:+12054132469">(205) 413-2469</a>
           </div>
         </div>
 
-        <div class="reveal visible">
-          <p class="section-label">Hours</p>
-          <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);">Studio <em>Hours</em></h2>
-          <div class="divider"></div>
-          <div class="hours-grid">
-            <span>Tuesday</span><span>10:00 am – 7:00 pm</span>
-            <span>Wednesday</span><span>10:00 am – 7:00 pm</span>
-            <span>Thursday</span><span>10:00 am – 7:00 pm</span>
-            <span>Friday</span><span>10:00 am – 6:00 pm</span>
-            <span>Saturday</span><span>9:00 am – 5:00 pm</span>
-            <span>Sunday – Monday</span><span>Closed</span>
+        <div class="contact-info-item">
+          <div class="label">Email</div>
+          <div class="value">
+            <a href="mailto:surekhaarya@gmail.com">surekhaarya@gmail.com</a>
           </div>
-          <p style="font-size:0.78rem; color:rgba(196,168,208,0.4); margin-top:1.5rem; letter-spacing:0.05em;">
-            * By appointment only. Exact address shared upon booking confirmation.
-          </p>
-          <a href="#booking" class="btn-primary" style="margin-top:2rem; display:inline-block;">Book Now</a>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="label">Instagram</div>
+          <div class="value">
+            <a href="https://instagram.com/happyskinspa" target="_blank">@happyskinspa</a>
+          </div>
         </div>
       </div>
+
+      <div>
+        <p class="section-label">Hours</p>
+        <h2 class="section-title">Studio <em>Hours</em></h2>
+        <div class="divider"></div>
+
+        <div class="hours-grid">
+          <span>Saturday</span><span>9:00 am – 5:00 pm</span>
+          <span>Sunday</span><span>9:00 am – 5:00 pm</span>
+        </div>
+
+        <p style="font-size:0.78rem; color:rgba(196,168,208,0.4); margin-top:1.5rem;">
+          By appointment only.
+        </p>
+
+        <a href="#booking" class="btn-primary" style="margin-top:2rem; display:inline-block;">
+          Book Now
+        </a>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- FOOTER -->
   <footer>

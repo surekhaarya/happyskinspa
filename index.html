@@ -276,16 +276,18 @@
     .services-grid {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 0.8rem;
+      margin-top: 1rem;
     }
     .service-card {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 2.2rem 2rem;
-      border: 1px solid rgba(201,149,106,0.25);
-      backdrop-filter: blur(6px);
-      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 1.25rem 1.35rem;
+      position: relative;
+      border: 1px solid rgba(201,149,106,0.18);
+      transition: background 0.3s, transform 0.2s;
+      cursor: default;
     }
-    .service-card:hover { background: var(--plum); }
+    .service-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
     .service-card::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
@@ -294,45 +296,41 @@
       transition: transform 0.4s;
     }
     .service-card:hover::before { transform: scaleX(1); }
-    .service-number { display:none;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      font-weight: 300;
-      color: rgba(201,149,106,0.12);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-      transition: color 0.4s;
+    .service-number {
+      display: none;
     }
-    .service-card:hover .service-number { display:none; color: rgba(201,149,106,0.25); }
+    .service-card:hover .service-number { color: rgba(201,149,106,0.25); }
     .service-name {
       font-family: 'Cinzel', serif;
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
       color: var(--rose-light);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
     }
     .service-desc {
-      font-size: 0.95rem;
-      line-height: 1.8;
+      font-size: 0.98rem;
+      line-height: 1.55;
       color: #f1e7dd;
-      margin-bottom: 1.4rem;
+      margin-bottom: 0.85rem;
     }
     .service-footer {
       display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid rgba(201,149,106,0.15);
-      padding-top: 1rem;
+      border-top: 1px solid rgba(201,149,106,0.12);
+      padding-top: 0.7rem;
+      gap: 1rem;
     }
     .service-price {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       font-weight: 300;
       color: var(--rose-gold);
     }
     .service-duration {
       font-size: 0.72rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(196,168,208,0.5);
+      color: rgba(241,231,221,0.72);
     }
 
     /* ── BOOKING ── */
@@ -544,103 +542,151 @@
         <p class="section-label">What We Offer</p>
         <h2 class="section-title">Our <em>Treatments</em></h2>
         <div class="divider"></div>
-      </div>
+      
       <div class="services-grid">
 
-        <div class="service-card reveal">
+        <div class="service-card">
           <div class="service-number">01</div>
-          <div class="service-name">Signature Glow Facial</div>
-          <p class="service-desc">Our most beloved treatment. Deep cleanse, gentle exfoliation, customized mask, and a relaxing face massage. Skin is left luminous and refreshed.</p>
+          <div class="service-name">Signature Facial</div>
+          <p class="service-desc">Our most popular treatments Includes cleansing, exfoliation, masque and soothing serums. We do in-depth skin analysis to determine the best types of treatment for each client. Get pampered with lots of massages and aroma therapy.</p>
           <div class="service-footer">
-            <span class="service-price">$85</span>
-            <span class="service-duration">60 min</span>
+            <span class="service-price">$99</span>
+            <span class="service-duration">60 minutes</span>
           </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-1">
+        <div class="service-card">
           <div class="service-number">02</div>
-          <div class="service-name">Deep Cleanse & Pore Refining</div>
-          <p class="service-desc">Targeted treatment to decongest pores, remove impurities, and balance oily or combination skin. Includes professional extractions.</p>
+          <div class="service-name">Acne Facial</div>
+          <p class="service-desc">A targeted facial treatment designed to prevent breakouts while reducing pore congestion and blemishes. This 60-minute facial utilizes steam, exfoliating enzymes, extractions, high frequency to kill the bacteria that causes acne, decongesting Clay Mask to deliver noticeably clearer skin.</p>
           <div class="service-footer">
-            <span class="service-price">$90</span>
-            <span class="service-duration">75 min</span>
+            <span class="service-price">$89</span>
+            <span class="service-duration">60 minutes</span>
           </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-2">
+        <div class="service-card">
           <div class="service-number">03</div>
-          <div class="service-name">Anti-Aging Renewal Facial</div>
-          <p class="service-desc">Firming and revitalizing facial focused on fine lines, elasticity, and a youthful glow. Includes collagen-boosting serums and facial lifting massage.</p>
-          <div class="service-footer">
-            <span class="service-price">$110</span>
-            <span class="service-duration">75 min</span>
-          </div>
-        </div>
-
-        <div class="service-card reveal">
-          <div class="service-number">04</div>
-          <div class="service-name">Sensitive Skin Calming Treatment</div>
-          <p class="service-desc">A gentle, soothing experience for reactive, rosacea-prone, or sensitive skin. Reduces redness and restores the skin's protective barrier.</p>
-          <div class="service-footer">
-            <span class="service-price">$85</span>
-            <span class="service-duration">60 min</span>
-          </div>
-        </div>
-
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-number">05</div>
-          <div class="service-name">Brightening & Pigmentation Facial</div>
-          <p class="service-desc">Targets dark spots, uneven tone, and dullness. Vitamin C infusion and gentle brightening acids reveal a more even, radiant complexion.</p>
-          <div class="service-footer">
-            <span class="service-price">$100</span>
-            <span class="service-duration">75 min</span>
-          </div>
-        </div>
-
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-number">06</div>
           <div class="service-name">Express Glow Facial</div>
-          <p class="service-desc">Perfect for a quick refresh before a special event. Cleanse, tone, mask, and moisturize. You'll walk out glowing in under an hour.</p>
+          <p class="service-desc">A quick reset for busy schedules. Deep cleanse, exfoliation, mask, and glow serum.</p>
           <div class="service-footer">
-            <span class="service-price">$55</span>
-            <span class="service-duration">30 min</span>
+            <span class="service-price">$65</span>
+            <span class="service-duration">40 minutes</span>
           </div>
         </div>
 
-        <div class="service-card reveal">
+        <div class="service-card">
+          <div class="service-number">04</div>
+          <div class="service-name">Detox Facial</div>
+          <p class="service-desc">These facials give immediate results removing muscle tension &amp; naturally sculpting your face while ridding your body of excess toxins &amp; bloat. This Facial includes the use of a gua sha stone to assist in toning the muscles of the face. The facial is completed with our custom hydrating jelly mask. Experience purified, clear and radiant skin with a lot of pampering.</p>
+          <div class="service-footer">
+            <span class="service-price">$145</span>
+            <span class="service-duration">75 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">05</div>
+          <div class="service-name">Dermaplaning Facial</div>
+          <p class="service-desc">A gentle scraping of the surface of your skin with a surgical scalpel to remove the top layer of dead skin and peach fuzz. Facial with calming &amp; hydrating serums, masks to boost the hydration of the skin.</p>
+          <div class="service-footer">
+            <span class="service-price">$225</span>
+            <span class="service-duration">50 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-number">06</div>
+          <div class="service-name">Microdermabrasion Facial</div>
+          <p class="service-desc">Using minimally abrasive instrument to gently sand skin, removing thicker, uneven outer layer and treating light scarring, discoloration, sun.</p>
+          <div class="service-footer">
+            <span class="service-price">$215</span>
+            <span class="service-duration">50 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
           <div class="service-number">07</div>
-          <div class="service-name">Chemical Peel Treatment</div>
-          <p class="service-desc">Professional-grade peel customized to your skin type. Addresses texture, tone, acne scarring, and congestion for transformative results.</p>
+          <div class="service-name">Brightening Facial</div>
+          <p class="service-desc">This is specifically to target dehydrated, hyperpigmented skin, fine line and wrinkles to restore hydration. A hydrating cleanse, light enzyme exfoliation lifts dead skin build up. Followed by firming peptide mask that has a firming effect and leaves your skin radiant.</p>
           <div class="service-footer">
-            <span class="service-price">$120</span>
-            <span class="service-duration">60 min</span>
+            <span class="service-price">$115</span>
+            <span class="service-duration">50 minutes</span>
           </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-1">
+        <div class="service-card">
           <div class="service-number">08</div>
-          <div class="service-name">Hydration Infusion Facial</div>
-          <p class="service-desc">Deeply moisturizing treatment for dry, dehydrated, or flaky skin. Hyaluronic acid-rich serums plump, nourish, and restore the skin's glow.</p>
+          <div class="service-name">Back Facial</div>
+          <p class="service-desc">Fade dark spots and treat acne with an upper back chemical peel.</p>
           <div class="service-footer">
-            <span class="service-price">$90</span>
-            <span class="service-duration">60 min</span>
-          </div>
-        </div>
-
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-number">09</div>
-          <div class="service-name">Acne Clearing Facial</div>
-          <p class="service-desc">A results-driven treatment combining gentle acids, antibacterial ingredients, and soothing botanicals to calm breakouts and prevent future blemishes.</p>
-          <div class="service-footer">
-            <span class="service-price">$95</span>
-            <span class="service-duration">75 min</span>
+            <span class="service-price">$89</span>
+            <span class="service-duration">60 minutes</span>
           </div>
         </div>
 
       </div>
-      <p style="font-size:0.78rem; color:rgba(196,168,208,0.4); margin-top:1.5rem; text-align:center; letter-spacing:0.06em;">
+
+      <div style="margin-top:2rem;">
+        <p class="section-label">Advanced Esthetics Treatment</p>
+
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-number">09</div>
+            <div class="service-name">Chemical Peels</div>
+            <p class="service-desc">Combat fine lines &amp; wrinkles, boost collagen for firmer, smoother skin and lightens hyperpigmentation.</p>
+            <div class="service-footer">
+              <span class="service-price">$99</span>
+              <span class="service-duration">30 minutes | One peel session</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-number">10</div>
+            <div class="service-name">Microneedling</div>
+            <p class="service-desc">Stimulates collagen tightens skin and improves skin texture.</p>
+            <div class="service-footer">
+              <span class="service-price">$260</span>
+              <span class="service-duration">45 minutes</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;">
+        <p class="section-label">Treatment Series</p>
+
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-number">11</div>
+            <div class="service-name">Chemical Peels | 3 Treatments</div>
+            <p class="service-desc">Refresh and brighten your skin with a series of Three peel Chemical Treatment.</p>
+            <div class="service-footer">
+              <span class="service-price">$645</span>
+              <span class="service-duration">$135 in Savings</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-number">12</div>
+            <div class="service-name">Microneedling | 3 Treatments</div>
+            <p class="service-desc">Stimulates collagen tightens skin and improves skin texture with a series of three microneedling session.</p>
+            <div class="service-footer">
+              <span class="service-price">$645</span>
+              <span class="service-duration">$135 in Savings</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <p style="font-size:0.78rem; color:rgba(196,168,208,0.4); margin-top:1.2rem; text-align:center; letter-spacing:0.06em;">
         All services are by appointment only &nbsp;·&nbsp; Prices and availability subject to change
       </p>
+
     </div>
   </section>
 

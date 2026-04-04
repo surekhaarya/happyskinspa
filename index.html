@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Happy Skin Spa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --plum:       #2a0a2e;
+      --plum-mid:   #3d1245;
+      --plum-light: #5c1f6b;
+      --rose-gold:  #c9956a;
+      --rose-light: #e8b98a;
+      --rose-pale:  #f5dfc8;
+      --cream:      #fdf6ef;
+      --black:      #0e0010;
+      --text-dim:   #c4a8d0;
+      --gold-line:  #b07d50;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: linear-gradient(to bottom, rgba(14,0,16,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(2px);
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.18em;
+      color: var(--rose-gold);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--rose-light); }
+
+    .nav-book {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--rose-gold);
+      border: none;
+      padding: 0.6rem 1.4rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+    .nav-book:hover { background: var(--rose-light); transform: translateY(-1px); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 1px; background: var(--rose-gold); transition: all 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      position: relative;
+      padding: 6rem 2rem 4rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(92,31,107,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 70%, rgba(201,149,106,0.12) 0%, transparent 60%),
+        var(--black);
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--black));
+    }
+
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 1.8rem;
+
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      margin-bottom: 0.2em;
+
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--rose-gold);
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-dim);
+      margin-top: 1.2rem;
+      margin-bottom: 2.8rem;
+      letter-spacing: 0.04em;
+
+    }
+    .hero-cta-wrap {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+
+    }
+    .btn-primary {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--rose-gold);
+      border: none;
+      padding: 1rem 2.4rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--rose-light); transform: translateY(-2px); }
+    .btn-secondary {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      background: transparent;
+      border: 1px solid var(--rose-gold);
+      padding: 1rem 2.4rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(201,149,106,0.1); transform: translateY(-2px); }
+
+    /* ornament */
+    .ornament {
+      display: block; margin: 2.5rem auto 0;
+      width: 120px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--rose-gold), transparent);
+
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--cream);
+    }
+    .section-title em { font-style: italic; color: var(--rose-gold); }
+    .divider {
+      width: 60px; height: 1px;
+      background: var(--gold-line);
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background:
+        radial-gradient(ellipse 70% 50% at 0% 50%, rgba(61,18,69,0.4) 0%, transparent 65%),
+        var(--black);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text-dim);
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--rose-light); font-weight: 400; }
+    .about-image-box {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: var(--plum-mid);
+      overflow: hidden;
+    }
+    .about-image-box::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,149,106,0.15), transparent 60%);
+    }
+    .about-image-box::after {
+      content: 'Your Photo Here';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(201,149,106,0.4);
+    }
+    .about-image-box img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .frame-accent {
+      position: absolute;
+      top: -12px; right: -12px;
+      width: calc(100% - 20px); height: calc(100% - 20px);
+      border: 1px solid rgba(201,149,106,0.25);
+      pointer-events: none;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background:
+        radial-gradient(ellipse 60% 50% at 100% 30%, rgba(92,31,107,0.3) 0%, transparent 65%),
+        var(--black);
+    }
+    .services-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 1rem;
+      background: transparent;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.04);
+      padding: 1.2rem 1.35rem;
+      position: relative;
+      border: 1px solid rgba(201,149,106,0.18);
+      transition: background 0.3s, transform 0.2s;
+      cursor: default;
+    }
+    .service-card:hover { background: rgba(255,255,255,0.06); transform: translateY(-1px); }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,149,106,0.4), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-number {
+      display: none;
+    }
+    .service-card:hover .service-number { color: rgba(201,149,106,0.25); }
+    .service-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.16em;
+      color: var(--rose-light);
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+    }
+    .service-desc {
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: #f1e7dd;
+      margin-bottom: 0.8rem;
+    }
+    .service-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(201,149,106,0.12);
+      padding-top: 0.65rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .service-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 300;
+      color: var(--rose-gold);
+    }
+    .service-duration {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(241,231,221,0.72);
+    }
+
+    /* ── BOOKING ── */
+    #booking {
+      text-align: center;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(61,18,69,0.6) 0%, transparent 70%),
+        var(--black);
+    }
+    .booking-inner { max-width: 640px; margin: 0 auto; }
+    .booking-inner .section-label, .booking-inner .section-title, .booking-inner .divider { display: block; margin-left: auto; margin-right: auto; }
+    .booking-inner .divider { width: 60px; }
+    .booking-inner p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--text-dim);
+      margin-bottom: 2.4rem;
+    }
+    .booking-note {
+      margin-top: 1.6rem;
+      font-size: 0.78rem;
+      color: rgba(196,168,208,0.5);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── GALLERY STRIP ── */
+    #gallery { padding: 4rem 0; overflow: hidden; }
+    .gallery-label {
+      text-align: center;
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 2rem;
+    }
+    .gallery-strip {
+      display: flex; gap: 1rem;
+      overflow-x: auto;
+      padding: 0 2rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .gallery-strip::-webkit-scrollbar { display: none; }
+    .gallery-item {
+      flex: 0 0 260px;
+      aspect-ratio: 3/4;
+      background: var(--plum-mid);
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-item::after {
+      content: 'Photo ' attr(data-n);
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(201,149,106,0.35);
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── CONTACT ── */
+    #contact {
+      background:
+        radial-gradient(ellipse 50% 60% at 0% 100%, rgba(92,31,107,0.3) 0%, transparent 65%),
+        var(--black);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-info-item {
+      margin-bottom: 2rem;
+    }
+    .contact-info-item .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--rose-gold);
+      margin-bottom: 0.4rem;
+    }
+    .contact-info-item .value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--cream);
+    }
+    .contact-info-item .value a { color: var(--cream); text-decoration: none; }
+    .contact-info-item .value a:hover { color: var(--rose-light); }
+
+    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem 1.5rem; margin-top: 0.8rem; }
+    .hours-grid span { font-size: 0.83rem; color: var(--text-dim); }
+    .hours-grid span:nth-child(odd) { color: var(--rose-pale); font-weight: 400; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(201,149,106,0.15);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(196,168,208,0.35);
+      letter-spacing: 0.1em;
+    }
+    footer span { color: rgba(201,149,106,0.5); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.4rem; }
+      .nav-links, .nav-book { display: none; }
+      .hamburger { display: flex; }
+
+      .nav-mobile-open .nav-links {
+        display: flex; flex-direction: column;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(14,0,16,0.98);
+        align-items: center; justify-content: center;
+        gap: 2rem; z-index: 200;
+      }
+      .nav-mobile-open .nav-links a { font-size: 1.1rem; }
+      .nav-mobile-open .nav-book { display: block; margin-top: 1rem; }
+
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-image-box { aspect-ratio: 4/3; max-width: 400px; }
+      section { padding: 4rem 1.4rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-cta-wrap { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; text-align: center; max-width: 280px; }
+    }
+  
+    /* ── MOBILE MENU ENHANCEMENT ── */
+    .hamburger {
+      position: relative;
+      z-index: 10001;
+      padding: 10px;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .nav-mobile-open {
+      background: rgba(14,0,16,0.98);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-mobile-open .nav-links {
+      display: flex !important;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(14,0,16,0.96);
+      backdrop-filter: blur(14px);
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 9999;
+      animation: menuFadeIn 0.28s ease;
+    }
+
+    .nav-mobile-open .nav-links a {
+      font-size: 1.05rem;
+      letter-spacing: 0.22em;
+    }
+
+    .nav-mobile-open .nav-book {
+      display: inline-block;
+      margin-top: 1rem;
+      z-index: 10000;
+    }
+
+    @keyframes menuFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- VERSION STAMP -->
+  <div id="version-stamp" style="background: rgba(201,149,106,0.15); border-bottom: 1px solid rgba(201,149,106,0.3); text-align:center; padding: 0.4rem; font-family:'Jost',sans-serif; font-size:0.7rem; letter-spacing:0.15em; color:#c9956a;">
+    Version: April 3, 2026 – 4:17 PM ET
+  </div>
+  <nav id="main-nav">
+    <a href="#hero" class="nav-logo">Happy Skin Spa</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://book.squareup.com/appointments/oa5ytcqii9jws4/location/L39E0MMCGDQKB/services" target="_blank" class="nav-book">Book Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">Private Facial &amp; Skin Care Studio</p>
+    <h1 class="hero-title">Happy<br><em>Skin Spa</em></h1>
+    <p class="hero-subtitle">Where your skin begins its journey to radiance</p>
+    <div class="hero-cta-wrap">
+      <a href="https://book.squareup.com/appointments/oa5ytcqii9jws4/location/L39E0MMCGDQKB/services" target="_blank" class="btn-primary">Book an Appointment</a>
+      <a href="#services" class="btn-secondary">Explore Services</a>
+    </div>
+    <span class="ornament"></span>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="section-label">Our Story</p>
+          <h2 class="section-title">Meet<br><em>Surekha</em><br>Master Esthetician</h2>
+          <div class="divider"></div>
+          <p>Welcome to <strong>Happy Skin Spa</strong>, the private studio of <strong>Surekha Arya</strong> — a licensed Master Esthetician and Master Esthetics Instructor based in Herndon, Virginia. With credentials at the highest level of the esthetics profession, Surekha brings deep expertise, genuine care, and a passion for healthy skin to every single appointment.</p>
+          <p>Unlike busy commercial spas, our intimate home studio offers something rare: <strong>your complete, undivided attention</strong>. No rushing, no distractions — just you, your skin, and a master-level expert fully focused on your results and comfort.</p>
+          <p>With over <strong>20 years of hands-on experience</strong>, Surekha brings a depth of skill that goes far beyond a standard facial. Her extensive training and master-level expertise mean she can read your skin, identify what it truly needs, and deliver real, visible results — treatment after treatment.</p>
+          <a href="#booking" class="btn-primary" style="margin-top:1.2rem; display:inline-block;">Reserve Your Visit</a>
+        </div>
+        <div class="about-image-box">
+          <!-- Replace with: <img src="your-photo.jpg" alt="Happy Skin Spa studio"> -->
+          <div class="frame-accent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  
+  <section id="services">
+    <div class="section-inner">
+      <div class="reveal visible">
+        <p class="section-label">Our Treatments</p>
+        <h2 class="section-title">Core <em>Treatments</em></h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-name">Signature Facial</div>
+          <p class="service-desc">Our most popular treatments Includes cleansing, exfoliation, masque and soothing serums. We do in-depth skin analysis to determine the best types of treatment for each client. Get pampered with lots of massages and aroma therapy.</p>
+          <div class="service-footer">
+            <span class="service-price">$99</span>
+            <span class="service-duration">60 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Microdermabrasion Facial</div>
+          <p class="service-desc">Using minimally abrasive instrument to gently sand skin, removing thicker, uneven outer layer and treating light scarring, discoloration, sun</p>
+          <div class="service-footer">
+            <span class="service-price">$115</span>
+            <span class="service-duration">50 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Acne Facial</div>
+          <p class="service-desc">A targeted facial treatment designed to prevent breakouts while reducing pore congestion and blemishes. This 60-minute facial utilizes steam, exfoliating enzymes, extractions, high frequency to kill the bacteria that causes acne, decongesting Clay Mask to deliver noticeably clearer skin.</p>
+          <div class="service-footer">
+            <span class="service-price">$89</span>
+            <span class="service-duration">60 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Express Glow Facial</div>
+          <p class="service-desc">A quick reset for busy schedules. Deep cleanse, exfoliation, mask, and glow serum</p>
+          <div class="service-footer">
+            <span class="service-price">$65</span>
+            <span class="service-duration">40 min</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Detox Facial</div>
+          <p class="service-desc">These facials give immediate results removing muscle tension &amp; naturally sculpting your face while ridding your body of excess toxins &amp; bloat. This Facial includes the use of a gua sha stone to assist in toning the muscles of the face. The facial is completed with our custom hydrating jelly mask. Experience purified, clear and radiant skin with a lot of pampering.</p>
+          <div class="service-footer">
+            <span class="service-price">$145</span>
+            <span class="service-duration">75 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Dermaplaning Facial</div>
+          <p class="service-desc">A gentle scraping of the surface of your skin with a surgical scalpel to remove the top layer of dead skin and peach fuzz. Facial with calming &amp; hydrating serums, masks to boost the hydration of the skin.</p>
+          <div class="service-footer">
+            <span class="service-price">$110</span>
+            <span class="service-duration">50 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Brightening Facial</div>
+          <p class="service-desc">This is specifically to target dehydrated, hyperpigmented skin, fine line and wrinkles to restore hydration. A hydrating cleanse, light enzyme exfoliation lifts dead skin build up. Followed by firming peptide mask that has a firming effect and leaves your skin radiant.</p>
+          <div class="service-footer">
+            <span class="service-price">$115</span>
+            <span class="service-duration">50 minutes</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Back Facial</div>
+          <p class="service-desc">Fade dark spots and treat acne with an upper back chemical peel.</p>
+          <div class="service-footer">
+            <span class="service-price">$99</span>
+            <span class="service-duration">60 minutes</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:2rem;">
+        <h2 class="section-title">Advanced <em>Treatments</em></h2>
+        <div class="divider"></div>
+
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-name">Chemical Peels</div>
+            <p class="service-desc">Combat fine lines &amp; wrinkles, boost collagen for firmer, smoother skin and lightens hyperpigmentation.</p>
+            <div class="service-footer">
+              <span class="service-price">$115</span>
+              <span class="service-duration">45 minutes | One peel session</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-name">Microneedling</div>
+            <p class="service-desc">Stimulates collagen tightens skin and improves skin texture</p>
+            <div class="service-footer">
+              <span class="service-price">$260</span>
+              <span class="service-duration">45 minutes</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;">
+        <h2 class="section-title">Packages</h2>
+        <div class="divider"></div>
+
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-name">Chemical Peels | 3 Treatments</div>
+            <p class="service-desc">Refresh and brighten your skin with a series of Three peel Chemical Treatment</p>
+            <div class="service-footer">
+              <span class="service-price">$300</span>
+              <span class="service-duration">$45 in Savings</span>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-name">Microneedling | 3 Treatments</div>
+            <p class="service-desc">Stimulates collagen tightens skin and improves skin texture with a series of three microneedling session.</p>
+            <div class="service-footer">
+              <span class="service-price">$645</span>
+              <span class="service-duration">$135 in Savings</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <p style="font-size:0.78rem; color:rgba(196,168,208,0.4); margin-top:1.2rem; text-align:center; letter-spacing:0.06em;">
+        All services are by appointment only &nbsp;·&nbsp; Prices and availability subject to change
+      </p>
+    </div>
+  </section>
+
+
+  <!-- GALLERY -->
+  
+  <section id="reviews">
+    <div class="section-inner">
+      <p class="section-label">Client Reviews</p>
+      <h2 class="section-title">What Clients <em>Say</em></h2>
+      <div class="divider"></div>
+
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-name">Christine</div>
+          <p class="service-desc">★★★★★ · a year ago<br><br>
+          Best facial I’ve ever had! My skin was assessed before the treatment started and my daily routine was discussed with recommendations. I’ve never been happier and cannot wait for my next session!!</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Madison Yager</div>
+          <p class="service-desc">★★★★★ · 11 months ago<br><br>
+          I had such an enjoyable and relaxing facial with Sue! She really takes the time to customize the experience to you. I learned a lot about my skin and she followed up with everything we discuss during the visit which was super helpful! I look forward to booking with her again!</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">Ginelle Ferraro</div>
+          <p class="service-desc">★★★★★ · 11 months ago<br><br>
+          Sue is a very knowledgeable Aesthetician. Helped me with my daily skin care routine. Love her!</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-name">L H</div>
+          <p class="service-desc">★★★★★ · a year ago<br><br>
+          I have been seeing Sue for 4 months now and I love the results. Sue explains everything, listens to your concerns and goals. If you are able and willing, she offers some great suggestions on trying out different services. I have been pleasantly pleased!</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <div class="section-inner booking-inner visible">
+      <p class="section-label reveal">Appointments</p>
+      <h2 class="section-title reveal reveal-delay-1">Ready to<br><em>Glow?</em></h2>
+      <div class="divider reveal reveal-delay-2" style="margin-left:auto;margin-right:auto;"></div>
+      <p class="reveal visible">Book your appointment online in just a few clicks — no phone call needed. Choose your service, pick a time that works for you, and we'll take care of the rest.</p>
+      <a href="https://book.squareup.com/appointments/oa5ytcqii9jws4/location/L39E0MMCGDQKB/services" target="_blank" class="btn-primary reveal reveal-delay-3">Book My Appointment</a>
+      <p class="booking-note reveal">Powered by Square Appointments &nbsp;·&nbsp; Secure &amp; Free Online Booking</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  
+  
+<section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="reveal visible">
+          <p class="section-label">Get in Touch</p>
+          <h2 class="section-title">Find <em>Us</em></h2>
+          <div class="divider"></div>
+
+          <div class="contact-info-item">
+            <div class="label">Location</div>
+            <div class="value">Your City, State &nbsp;·&nbsp; Private Home Studio</div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="label">Phone / Text</div>
+            <div class="value"><a href="tel:+10000000000">(000) 000-0000</a></div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="label">Email</div>
+            <div class="value"><a href="/cdn-cgi/l/email-protection#ec8489808083ac848d9c9c959f8785829f9c8dc28f8381"><span class="__cf_email__" data-cfemail="abc3cec7c7c4ebc3cadbdbd2d8c0c2c5d8dbca85c8c4c6">[email&#160;protected]</span></a></div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="label">Instagram</div>
+            <div class="value"><a href="https://instagram.com/happyskinspa" target="_blank">@happyskinspa</a></div>
+          </div>
+        </div>
+
+        <div class="reveal visible">
+          <p class="section-label">Hours</p>
+          <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem);">Studio <em>Hours</em></h2>
+          <div class="divider"></div>
+          <div class="hours-grid">
+            <span>Tuesday</span><span>10:00 am – 7:00 pm</span>
+            <span>Wednesday</span><span>10:00 am – 7:00 pm</span>
+            <span>Thursday</span><span>10:00 am – 7:00 pm</span>
+            <span>Friday</span><span>10:00 am – 6:00 pm</span>
+            <span>Saturday</span><span>9:00 am – 5:00 pm</span>
+            <span>Sunday – Monday</span><span>Closed</span>
+          </div>
+          <p style="font-size:0.78rem; color:rgba(196,168,208,0.4); margin-top:1.5rem; letter-spacing:0.05em;">
+            * By appointment only. Exact address shared upon booking confirmation.
+          </p>
+          <a href="#booking" class="btn-primary" style="margin-top:2rem; display:inline-block;">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; <span id="year"></span> Happy Skin Spa &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; Private Home Studio</p>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('main-nav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('nav-mobile-open');
+    });
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => nav.classList.remove('nav-mobile-open'));
+    });
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) =>

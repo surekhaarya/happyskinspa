@@ -529,6 +529,54 @@
       animation: menuFadeIn 0.22s ease;
     }
 
+  
+    .nav-mobile-open .nav-links {
+      display: flex !important;
+      flex-direction: column;
+      position: fixed;
+      inset: 0;
+      background: rgba(14,0,16,0.97);
+      backdrop-filter: blur(14px);
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 10040;
+      animation: menuFadeIn 0.22s ease;
+    }
+    .nav-mobile-open .nav-links a {
+      font-size: 1.08rem;
+      letter-spacing: 0.22em;
+    }
+    .nav-mobile-open .nav-book {
+      display: inline-block !important;
+      position: fixed;
+      left: 50%;
+      bottom: 2rem;
+      transform: translateX(-50%);
+      z-index: 10041;
+    }
+    .hamburger {
+      padding: 12px;
+      position: relative;
+      z-index: 10060;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    body.menu-open {
+      overflow: hidden;
+    }
+    #build-timestamp {
+      display: block;
+      margin-top: 0.9rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      color: rgba(196,168,208,0.45);
+    }
+    @keyframes menuFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
   </style>
 
 </head>
@@ -575,7 +623,7 @@
           <p>Welcome to <strong>Happy Skin Spa</strong>, the private studio of <strong>Surekha Arya</strong> — a licensed Master Esthetician and Master Esthetics Instructor based in Herndon, Virginia. With credentials at the highest level of the esthetics profession, Surekha brings deep expertise, genuine care, and a passion for healthy skin to every single appointment.</p>
           <p>Unlike busy commercial spas, our intimate home studio offers something rare: <strong>your complete, undivided attention</strong>. No rushing, no distractions — just you, your skin, and a master-level expert fully focused on your results and comfort.</p>
           <p>With over <strong>20 years of hands-on experience</strong>, Surekha brings a depth of skill that goes far beyond a standard facial. Her extensive training and master-level expertise mean she can read your skin, identify what it truly needs, and deliver real, visible results — treatment after treatment.</p>
-          <a href="#booking" class="btn-primary" style="margin-top:1.2rem; display:inline-block;">Reserve Your Visit</a>
+          <a href="https://book.squareup.com/appointments/oa5ytcqii9jws4/location/L39E0MMCGDQKB/services" target="_blank" class="btn-primary" style="margin-top:1.2rem; display:inline-block;">Reserve Your Visit</a>
         </div>
         <div class="about-image-box">
           <!-- Replace with: <img src="your-photo.jpg" alt="Happy Skin Spa studio"> -->
@@ -837,7 +885,7 @@
           By appointment only.
         </p>
 
-        <a href="#booking" class="btn-primary" style="margin-top:2rem; display:inline-block;">
+        <a href="https://book.squareup.com/appointments/oa5ytcqii9jws4/location/L39E0MMCGDQKB/services" target="_blank" class="btn-primary" style="margin-top:2rem; display:inline-block;">
           Book Now
         </a>
       </div>
@@ -847,26 +895,86 @@
 </section>
 
 
+  
   <!-- FOOTER -->
   <footer>
-    <p>&copy; <span id="year"></span> Happy Skin Spa &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; Private Home Studio</p>
+    <p>&copy; <span id="year"></span> Happy Skin Spa &nbsp;·&nbsp; All Rights Reserved</p>
+    <span id="build-timestamp">Last updated: loading...</span>
   </footer>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', function () {
+      var yearEl = document.getElementById('year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
 
-    // Hamburger menu
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('main-nav');
-    hamburger.addEventListener('click', () => {
-      nav.classList.toggle('nav-mobile-open');
-    });
-    // Close menu when a link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => nav.classList.remove('nav-mobile-open'));
-    });
+      var tsEl = document.getElementById('build-timestamp');
+      if (tsEl) {
+        var lastModified = document.lastModified ? new Date(document.lastModified) : null;
+        if (lastModified && !isNaN(lastModified.getTime())) {
+          tsEl.textContent = 'Last updated: ' + lastModified.toLocaleString();
+        } else {
+          tsEl.textContent = 'Last updated: unavailable';
+        }
+      }
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) =>
+      var nav = document.getElementById('main-nav');
+      var hamburger = document.getElementById('hamburger');
+
+      function openMenu() {
+        if (!nav) return;
+        nav.classList.add('nav-mobile-open');
+        document.body.classList.add('menu-open');
+        if (hamburger) hamburger.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeMenu() {
+        if (!nav) return;
+        nav.classList.remove('nav-mobile-open');
+        document.body.classList.remove('menu-open');
+        if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      }
+
+      function toggleMenu(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        if (!nav) return;
+        if (nav.classList.contains('nav-mobile-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      }
+
+      if (hamburger) {
+        hamburger.setAttribute('type', 'button');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.addEventListener('click', toggleMenu, false);
+        hamburger.addEventListener('touchend', toggleMenu, false);
+      }
+
+      document.querySelectorAll('.nav-links a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          closeMenu();
+        }, false);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!nav || !nav.classList.contains('nav-mobile-open')) return;
+        if (!nav.contains(e.target)) {
+          closeMenu();
+        }
+      }, false);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeMenu();
+        }
+      }, false);
+    });
+  </script>
+</body>
+</html>

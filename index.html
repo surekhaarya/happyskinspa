@@ -59,7 +59,7 @@
       color: var(--rose-gold);
       text-decoration: none;
     }
-    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; padding-left: 0; }
     .nav-links a {
       font-family: 'Jost', sans-serif;
       font-size: 0.78rem;
@@ -476,24 +476,36 @@
       .hamburger { display: flex; }
 
       .nav-mobile-open .nav-links {
-        display: flex !important;
-        flex-direction: column;
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(14,0,16,0.96);
-        backdrop-filter: blur(14px);
-        align-items: center; justify-content: center;
-        gap: 2rem; z-index: 10040;
-        padding: 2rem;
-      }
-      .nav-mobile-open .nav-links a { font-size: 1.1rem; }
-      .nav-mobile-open .nav-book {
-        display: inline-block;
-        position: fixed;
-        left: 50%;
-        bottom: 2rem;
-        transform: translateX(-50%);
-        z-index: 10041;
-      }
+      display: flex !important;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(14,0,16,0.97);
+      backdrop-filter: blur(14px);
+      align-items: center;
+      justify-content: center;
+      gap: 1.6rem;
+      z-index: 10040;
+      padding: 5.5rem 1.5rem 2rem;
+      overflow-y: auto;
+      animation: menuFadeIn 0.22s ease;
+    }
+    .nav-mobile-open .nav-links a {
+      font-size: 1.05rem;
+      letter-spacing: 0.18em;
+      text-align: center;
+    }
+    .nav-mobile-open .nav-book {
+      display: inline-block !important;
+      position: static;
+      transform: none;
+      margin-top: 0;
+      z-index: 10041;
+      align-self: center;
+    }
 
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-image-box { aspect-ratio: 4/3; max-width: 400px; }

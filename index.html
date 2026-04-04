@@ -46,7 +46,7 @@
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 10050;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.4rem 3rem;
       background: linear-gradient(to bottom, rgba(14,0,16,0.95) 0%, transparent 100%);
@@ -90,7 +90,19 @@
     .nav-book:hover { background: var(--rose-light); transform: translateY(-1px); }
 
     /* hamburger */
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 12px;
+      position: relative;
+      z-index: 10060;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
     .hamburger span { display: block; width: 24px; height: 1px; background: var(--rose-gold); transition: all 0.3s; }
 
     /* ── HERO ── */
@@ -464,14 +476,24 @@
       .hamburger { display: flex; }
 
       .nav-mobile-open .nav-links {
-        display: flex; flex-direction: column;
+        display: flex !important;
+        flex-direction: column;
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(14,0,16,0.98);
+        background: rgba(14,0,16,0.96);
+        backdrop-filter: blur(14px);
         align-items: center; justify-content: center;
-        gap: 2rem; z-index: 200;
+        gap: 2rem; z-index: 10040;
+        padding: 2rem;
       }
       .nav-mobile-open .nav-links a { font-size: 1.1rem; }
-      .nav-mobile-open .nav-book { display: block; margin-top: 1rem; }
+      .nav-mobile-open .nav-book {
+        display: inline-block;
+        position: fixed;
+        left: 50%;
+        bottom: 2rem;
+        transform: translateX(-50%);
+        z-index: 10041;
+      }
 
       .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .about-image-box { aspect-ratio: 4/3; max-width: 400px; }
@@ -495,7 +517,19 @@
   gap: 2rem;
   z-index: 9999;
 }
-</style>
+
+    .nav-mobile-open { overflow: visible; }
+    body.menu-open { overflow: hidden; }
+
+    @keyframes menuFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .nav-mobile-open .nav-links {
+      animation: menuFadeIn 0.22s ease;
+    }
+
+  </style>
 
 </head>
 <body>
@@ -818,7 +852,7 @@
     <p>&copy; <span id="year"></span> Happy Skin Spa &nbsp;·&nbsp; All Rights Reserved &nbsp;·&nbsp; Private Home Studio</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
